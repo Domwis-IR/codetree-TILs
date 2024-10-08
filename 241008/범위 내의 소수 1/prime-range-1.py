@@ -18,4 +18,4 @@ for num in range(a, b+1):
         min_prime = min(min_prime, num)
 
 print(sum_prime, end=' ')
-print(min_prime)
+print(0 if min_prime == 10e6 else min_prime)
