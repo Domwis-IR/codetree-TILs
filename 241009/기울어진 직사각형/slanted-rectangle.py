@@ -11,7 +11,7 @@ def get_score(y, x, r, c):
 
     sum_of_nums = 0
 
-    for (dx, dy) move_num in zip(directions, move_nums):
+    for (dy, dx), move_num in zip(directions, move_nums):
         for _ in range(move_num):
             y, x = y + dy, x + dx
             if not in_range(y, x, n):
