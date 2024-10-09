@@ -54,9 +54,8 @@ for i in range(n):
     for j in range(m):
         if grid[i][j] > 0:
             # 모든 사이즈별로 점검
-            directions = [(0,1), (1,0), (0,-1),(-1,0)]
-            for r in range(n):
-                for c in range(m):
+            for r in range(n-i):
+                for c in range(m-j):
                     size = get_positive(i,j,n,m,r,c)
                     max_size = max(max_size, size)
                     # print(i, j, r, c, size, "max_size", max_size)
