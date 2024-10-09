@@ -17,6 +17,7 @@ for i in range(n):
                     for (dy, dx), k in zip(directions, length):
                         for _ in range(k):
                             ny, nx = y + dy, x + dx
+                            print("now", ny, nx,k)
                             if (0<= ny <n and 0 <= nx < m) and grid[ny][nx] > 0:
                                 y, x = ny, nx
                             else:
@@ -26,6 +27,6 @@ for i in range(n):
                             break
                     size = (length[0]+1) * (length[1]+1)
                     max_size = max(max_size, size)
-                    #print(i, j, r, c, size, "max_size", max_size)
+                    print(i, j, r, c, size, "max_size", max_size)
 
 print(max_size if max_size != 0 else -1)
