@@ -1,63 +1,28 @@
 n, m = map(int, input().split())
 
-grid = [list(map(int,input().split())) for _ in range(n)]
-
-def in_range(y,x,n,m):
-    return 0 <= y < n and 0 <= x < m
-
-def get_positive(y,x, n, m, r, c):
-    directions = [(0,1), (1,0), (0,-1),(-1,0)]
-    move_nums = [r, c, r, c]
-
-    is_positive = False
-
-    if r == 0:
-        for _ in range(c):
-            y, x = y + 0, x + 1
-            if in_range(y,x,n,m) and grid[y][x] > 0:
-                is_positive = True
-            else:
-                is_positive = False
-                break
-
-    elif c == 0:
-        for _ in range(r):
-            y, x = y + 1, x + 0
-            if in_range(y,x,n,m) and grid[y][x] > 0:
-                is_positive = True
-            else:
-                is_positive = False
-                break
-
-    else:
-        for (dy, dx), move_num in zip(directions, move_nums):
-            for _ in range(move_num):
-                y, x = y + dy, x + dx
-                if in_range(y,x,n,m) and grid[y][x] > 0:
-                    is_positive = True
-                else:
-                    is_positive = False
-                    break
-            if not is_positive:
-                break
-
-    if is_positive:
-        return (r + 1) * (c + 1)
-    else:
-        return -1
-
+grid = [list(map(int, input().split())) for _ in range(n)]
 
 max_size = -1
 
-# 모든 좌표에 대해서 
+# 각 시작 위치를 기준으로 가능한 직사각형 크기를 탐색
 for i in range(n):
     for j in range(m):
-        if grid[i][j] > 0:
-            # 모든 사이즈별로 점검
-            for r in range(n-i):
-                for c in range(m-j):
-                    size = get_positive(i,j,n,m,r,c)
-                    max_size = max(max_size, size)
-                    # print(i, j, r, c, size, "max_size", max_size)
+        if grid[i][j] > 0:  # 시작 위치가 양수일 때만 탐색
+            # 가능한 직사각형 크기 (높이 r, 너비 c)
+            for r in range(i, n):
+                for c in range(j, m):
+                    is_positive = True
+                    # 직사각형 내의 모든 값이 양수인지 확인
+                    for y in range(i, r + 1):
+                        for x in range(j, c + 1):
+                            if grid[y][x] <= 0:  # 하나라도 음수면 양수 직사각형이 아님
+                                is_positive = False
+                                break
+                        if not is_positive:
+                            break
+
+                    if is_positive:
+                        # 크기 갱신
+                        max_size = max(max_size, (r - i + 1) * (c - j + 1))
 
 print(max_size)
