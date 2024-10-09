@@ -21,7 +21,7 @@ for i in range(n):
                         else:
                             length = [0,0,0,0]
                             break
-                    size = r * c
+                    size = (length[0]-1) * (length[1]-1)
                     max_size = max(max_size, size)
 
 print(0 if max_size == 0 else max_size)
