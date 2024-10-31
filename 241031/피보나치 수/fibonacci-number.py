@@ -10,7 +10,7 @@ def fibo(n):
     if n <= 2:
         dp[n] = 1
     else:
-        dp[n] = dp[n-2] + dp[n-1]
+        dp[n] = fibo(n-1) + fibo(n-2)
     
     return dp[n]
 
