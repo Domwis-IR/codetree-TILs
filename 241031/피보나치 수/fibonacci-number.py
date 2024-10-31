@@ -5,8 +5,6 @@
 #         return fibo(n-1) + fibo(n-2)
 
 def fibo(n):
-    dp = [-1] * (n+1)
-    # print(dp)
     if dp[n] != -1:
         return dp[n]
     if n <= 2:
@@ -17,4 +15,5 @@ def fibo(n):
     return dp[n]
 
 n = int(input())
+dp = [-1] * (n+1)
 print(fibo(n))
